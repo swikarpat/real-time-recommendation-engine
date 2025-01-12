@@ -2,7 +2,7 @@
 
 This project implements a real-time recommendation engine for an e-commerce platform.
 
-# Real-Time Recommendation Engine Runbook
+# Runbook
 
 This document provides guidelines for troubleshooting and maintaining the real-time recommendation engine.
 
