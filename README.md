@@ -1,6 +1,6 @@
 # Real-Time Recommendation Engine
 
-This project implements a real-time recommendation engine for an e-commerce platform.
+This data engineering project implements a real-time recommendation engine for an e-commerce platform.
 
 # Runbook
 
