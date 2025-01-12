@@ -1,0 +1,44 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Recommendation Engine Monitoring",
+    "panels": [
+      {
+        "title": "API Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=\"recommendation-api\"}[1m])",
+            "legendFormat": "{{method}} {{path}}",
+            "refId": "A"
+          }
+        ],
+        "id": 1,
+        "datasource": "Prometheus"
+      },
+      {
+        "title": "API Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{job=\"recommendation-api\", status=~\"5..\"}[1m])",
+            "legendFormat": "{{method}} {{path}}",
+            "refId": "A"
+          }
+        ],
+        "id": 2,
+        "datasource": "Prometheus"
+      }
+      # ... Add more panels for other metrics like latency, model prediction scores, etc.
+    ]
+  },
+  "overwrite": false,
+  "inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "value": "prometheus"
+    }
+  ]
+}

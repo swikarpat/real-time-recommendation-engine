@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendation-api
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: recommendation-api
+  template:
+    metadata:
+      labels:
+        app: recommendation-api
+    spec:
+      containers:
+        - name: api-container
+          image: your-docker-repo/recommendation-api:latest  # Replace with your API Docker image
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+          env:
+            - name: INFERENCE_SERVICE_URL
+              value: http://recommendation-inference-service:8000/predict # Replace with your inference service URL or service discovery mechanism
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendation-api-service
+spec:
+  selector:
+    app: recommendation-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer  # Or use ClusterIP or NodePort depending on your setup
